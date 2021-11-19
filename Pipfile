@@ -12,6 +12,7 @@ django-guardian = "*"
 pillow = "*"
 gunicorn = "*"
 whitenoise = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useReducer} from 'react'
-import { authInitialState, taskInitialState, notificationState } from './initialState'
-import { auth, file, notification } from './reducers'
+import {authInitialState, taskInitialState, notificationState} from './initialState'
+import {auth, file, notification} from './reducers'
 import axios from "axios";
 import {getHeader} from "./action/auth";
 
@@ -11,31 +11,44 @@ const GlobalProvider = ({children}) => {
     const [fileState, fileDispatch] = useReducer(file, taskInitialState)
     const [alert, notificationDispatch] = useReducer(notification, notificationState)
 
-     const clearAlertData = () => {
+    const clearAlertData = () => {
         return notificationDispatch({
             type: 'CLEAR_ALERT',
         })
     }
 
     useEffect(() => {
-         axios
+        authDispatch({
+            type: "LOADING_ON",
+        })
+        axios
             .get("api/me/", getHeader())
             .then(res => {
                 authDispatch({
-                  type: "USER_LOADED",
-                  payload:res.data
+                    type: "USER_LOADED",
+                    payload: res.data
                 })
-            }).catch(error => authDispatch({
-                    type: "LOG_OUT",
-         }))
-    },[])
+                authDispatch({
+                    type: "LOADING_OFF",
+                })
+            }).catch(error => {
+            authDispatch({
+                type: "LOG_OUT",
+            })
+            authDispatch({
+                type: "LOADING_OFF",
+            })
+        })
+    }, [])
     //console.log(authState)
 
     return (<>
-        <GlobalContext.Provider value={{authState, authDispatch, fileState, fileDispatch, alert, clearAlertData,
-            notificationDispatch}}>
-            {children}
-        </GlobalContext.Provider></>
+            <GlobalContext.Provider value={{
+                authState, authDispatch, fileState, fileDispatch, alert, clearAlertData,
+                notificationDispatch
+            }}>
+                {children}
+            </GlobalContext.Provider></>
     )
 }
 

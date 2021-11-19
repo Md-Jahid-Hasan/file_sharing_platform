@@ -10,6 +10,10 @@ const auth = (state, action) => {
         case "USER_LOADED":
             return {...state, name:action.payload.name, email:action.payload.email,
                 is_admin: action.payload.is_staff, is_authenticated:true}
+        case "LOADING_ON":
+            return {...state, is_loading: true}
+        case "LOADING_OFF":
+            return {...state, is_loading: false}
 
         default:
             return state

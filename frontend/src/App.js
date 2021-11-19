@@ -10,30 +10,31 @@ import LoginPrivateRoute from "./private route/LoginPrivateRoute";
 import axios from "axios";
 import {getHeader} from "./context/action/auth";
 import ShowFile from "./Components/UploadFile/ShowFile";
+import LogOutPrivateRoute from "./private route/LogoutPrivateRoute";
 
 function App() {
     const {authState, authDispatch} = useContext(GlobalContext)
-
+    console.log("render")
     return (<>
             <Notification/>
-
+             {authState.is_loading ? <p>Loading....</p> :
             <Router>
                 <Routes>
-                    {authState.is_authenticated ?
-                    <><Route exact path="" element={
-                        <LoginPrivateRoute>
-                            <Dashboard/>
-                        </LoginPrivateRoute>}/>
-                    <Route exact path="/file" element={
-                        <LoginPrivateRoute>
-                            <UploadFile/>
-                        </LoginPrivateRoute>}/>
-                    <Route exact path={"/show/:fileId"} element={<ShowFile/>}/>
-                    </>:
+                        <Route exact path="" element={
+                            <LoginPrivateRoute>
+                                <Dashboard/>
+                            </LoginPrivateRoute>}/>
+                            <Route exact path="/file" element={
+                                <LoginPrivateRoute>
+                                    <UploadFile/>
+                                </LoginPrivateRoute>}/>
+                            <Route exact path={"/show/:fileId"} element={<ShowFile/>}/>
 
-                    <Route exact path="/login" element={<LoginPage/>}/>}
+
+                            <Route exact path="/login" element={<LoginPage/>}/>
+
                 </Routes>
-            </Router>
+            </Router> }
         </>
 
     );

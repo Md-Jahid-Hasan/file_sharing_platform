@@ -13,10 +13,8 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -28,7 +26,6 @@ SECRET_KEY = 'django-insecure-y9fc*0-ja%kt+2bo6rpt+c)r!@$(p#oc#+(vc)_qg5-b(!qpab
 DEBUG = False
 
 ALLOWED_HOSTS = ['file-drive-platform.herokuapp.com', '127.0.0.1']
-
 
 # Application definition
 
@@ -114,7 +111,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'FileSharingPlatform.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -127,7 +123,10 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+import dj_database_url
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -147,7 +146,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -161,7 +159,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_DIRS = [
@@ -172,7 +169,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
 #     BASE_DIR / "frontend/static",
-#]
+# ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -186,4 +183,3 @@ EMAIL_HOST_USER = 'rbbjahid@gmail.com'
 EMAIL_HOST_PASSWORD = 'hdwdovldfpcrogla'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-

@@ -10,7 +10,7 @@ import {login} from "../../context/action/auth";
 
 const LoginPage = () => {
   // Login Function
-  const {notificationDispatch, authDispatch} = useContext(GlobalContext)
+  const {notificationDispatch,authState, authDispatch} = useContext(GlobalContext)
   const history = useNavigate()
   const [loginState, setLoginState] = useState({
     email: "",
