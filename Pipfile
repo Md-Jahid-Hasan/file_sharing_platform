@@ -10,6 +10,8 @@ djangorestframework-simplejwt = "*"
 psycopg2 = "*"
 django-guardian = "*"
 pillow = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
