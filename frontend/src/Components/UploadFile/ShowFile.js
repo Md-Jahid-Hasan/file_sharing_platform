@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom";
 import FileViewer from "react-file-viewer";
-import f from './1.pdf'
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {getHeader} from "../../context/action/auth";

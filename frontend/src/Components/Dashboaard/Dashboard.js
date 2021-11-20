@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import RegisterFromModal from "../User/RegisterFromModal";
 import {getUser} from "../../context/action/auth";
 import {GlobalContext} from "../../context/Provider";
+import {useNavigate} from "react-router-dom";
 
 const Dashboard = () => {
   //   Register Modal Function
@@ -12,6 +13,7 @@ const Dashboard = () => {
   const [reShow, setReShow] = useState(false);
   const [users, setUsers] = useState([])
   const [userDetails, setUserDetails] = useState({})
+    const history = useNavigate();
 
   useEffect(() => {
     getUser()
@@ -58,6 +60,9 @@ const Dashboard = () => {
           <h3>Dashboard</h3>
           <button className="btn-login" onClick={() => reHandleShow()}>
             Create User
+          </button>
+          <button className="btn-login" onClick={() => history("/file")}>
+            File
           </button>
         </div>
 

@@ -85,9 +85,9 @@ const LoginPage = () => {
           <div className="input-block">
             <div className="input-block-password">
               <label for="login-password">Password</label>
-              <span for="forgot-password" onClick={handleShow}>
-                Forgot password?
-              </span>
+              {/*<span for="forgot-password" onClick={handleShow}>*/}
+              {/*  Forgot password?*/}
+              {/*</span>*/}
             </div>
 
             <div className="input-block-password">
