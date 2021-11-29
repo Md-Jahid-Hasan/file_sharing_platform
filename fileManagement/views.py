@@ -91,7 +91,7 @@ class FolderView(viewsets.ModelViewSet):
 class FileView(viewsets.ModelViewSet):
     serializer_class = FileSerializer
     queryset = File.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         if self.request.query_params.get('share'):
