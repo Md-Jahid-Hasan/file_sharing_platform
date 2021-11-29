@@ -225,9 +225,6 @@ const UploadFile = () => {
                                 <li onClick={fileUpload}>
                                     <i className="fas fa-file-upload"></i> File Upload
                                 </li>
-                                <li>
-                                    <i className="fas fa-folder"></i>Folder Upload
-                                </li>
                             </ul>
                         </label>
 
@@ -352,7 +349,7 @@ const UploadFile = () => {
                 </MenuItem>
                 <MenuItem className="right-btn-sub" onClick={deleteContent}>
                     <i className="fas fa-trash-alt"></i>
-                    <span>Remove</span>
+                    <span>Delete</span>
                 </MenuItem>
             </ContextMenu>
 
@@ -426,7 +423,7 @@ const UploadFile = () => {
 
             <Modal show={shareFile} onHide={shareFileClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Share</Modal.Title>
+                    <Modal.Title>Share new</Modal.Title>
                 </Modal.Header>
                 <input className="folder-input" type="email" id="share" name="share" onChange={(e) =>
                     setShareFileData({...shareFileData, email: e.target.value})

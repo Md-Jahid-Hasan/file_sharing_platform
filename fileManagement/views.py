@@ -104,13 +104,14 @@ class FileView(viewsets.ModelViewSet):
     @decorators.action(methods=['POST'], detail=True, url_path="share")
     def share_file(self, request, pk=None):
         file = self.get_object()
+        url = request.META.get('HTTP_HOST')+"/media/"+str(file.content)
         email = request.data
         user = User().objects.filter(email=email).first()
         if not user:
             return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
         else:
             file.permission.add(user)
-        message = f"Dear {user.name}, {request.user.name} are shared a file with you."
+        message = f"Dear {user.name}, {request.user.name} are shared a file with you.\n file link: {url}"
         send_mail('Welcome To File Sharing Platform', message, EMAIL_HOST, [user.email, ])
         return Response({"Success": "File Share Successfully"}, status=status.HTTP_200_OK)
 
