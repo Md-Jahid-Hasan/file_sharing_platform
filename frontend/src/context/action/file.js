@@ -45,7 +45,7 @@ export const updateFolder = (folder) => {
         })
 }
 
-export const uploadFile = (source, name, size, folder) => {
+export const uploadFile = (source, name, size, folder=null) => {
     //const body = JSON.stringify({...folder})
     let config = getHeader()
     config['Content-Type'] = 'multipart/form-data'
@@ -53,8 +53,9 @@ export const uploadFile = (source, name, size, folder) => {
     body.append("content", source)
     body.append("name", name)
     body.append("size", size)
-    body.append("folder", folder)
+    folder && body.append("folder", folder)
 
+    console.log(source, name, size, parseInt(folder), body)
     return axios
         .post("/api/directory/file/", body, config)
         .then(res => {
@@ -62,6 +63,7 @@ export const uploadFile = (source, name, size, folder) => {
             return data
         })
         .catch(error => {
+            console.log(error.response.data)
             let data = {message: {message: error.response.data.detail, code: "danger"}, status: 400}
             return data
         })

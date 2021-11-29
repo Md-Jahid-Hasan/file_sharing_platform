@@ -175,13 +175,6 @@ const UploadFile = () => {
                 })
             })
     }
-    console.log(files, folders)
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-
-    function onDocumentLoadSuccess({numPages}) {
-        setNumPages(numPages);
-    }
 
     const deleteContent = () => {
         deleteUserContent({...deleteData})
@@ -205,7 +198,7 @@ const UploadFile = () => {
                 })
             })
     }
-
+    console.log(shareFileData)
     return (
         <>
             <section className="upload-section">
@@ -292,7 +285,7 @@ const UploadFile = () => {
                         <div className="upload-folder-btn">
                             {shared.map(file =>
                                 <ContextMenuTrigger id="contextmenu" collect={() => {
-                                    setShareFileData({...shareFileData, id: file.id})
+                                    setShareFileData({...shareFileData, id: ""})
                                     setFileDetails(file)
                                     setDeleteData({id: file.id, fType: "file"})
                                 }}>
@@ -339,10 +332,10 @@ const UploadFile = () => {
                     <i className="fas fa-file-signature"></i>
                     <span>Rename</span>
                 </MenuItem>
-                <MenuItem className="right-btn-sub" onClick={shareFileClose}>
+                {shareFileData.id && <MenuItem className="right-btn-sub" onClick={shareFileClose}>
                     <i className="fas fa-share-square"></i>
                     <span>Share</span>
-                </MenuItem>
+                </MenuItem>}
                 <MenuItem className="right-btn-sub" onClick={detailsHandleShow}>
                     <i className="fas fa-feather-alt"></i>
                     <span>Details</span>

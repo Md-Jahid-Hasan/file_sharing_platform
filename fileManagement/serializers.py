@@ -15,6 +15,7 @@ class FileSerializer(serializers.ModelSerializer):
         return obj.content.url
 
     def create(self, validated_data):
+        print(validated_data)
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
 
