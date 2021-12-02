@@ -39,5 +39,5 @@ class SubFolderDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Folder
-        fields = ['folder', 'file']
+        fields = ['folder', 'file', 'name']
 

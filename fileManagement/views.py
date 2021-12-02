@@ -104,7 +104,7 @@ class FileView(viewsets.ModelViewSet):
     @decorators.action(methods=['POST'], detail=True, url_path="share")
     def share_file(self, request, pk=None):
         file = self.get_object()
-        url = request.META.get('HTTP_HOST')+"/media/"+str(file.content)
+        url = request.META.get('HTTP_HOST')+"/show/"+str(file.pk)
         email = request.data
         user = User().objects.filter(email=email).first()
         if not user:

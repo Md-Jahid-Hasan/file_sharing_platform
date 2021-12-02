@@ -32,6 +32,7 @@ const UploadFile = () => {
     const [shareFileData, setShareFileData] = useState({id: '', email: ''})
     const [deleteData, setDeleteData] = useState({id: '', fType: ''})
     const [fileDetails, setFileDetails] = useState()
+    const [folderName, setFolderName] = useState("File/Folders")
 
     const location = useLocation();
     const history = useNavigate();
@@ -59,6 +60,7 @@ const UploadFile = () => {
         console.log(e, "error in file-viewer");
     };
 
+
     useEffect(() => {
         getFolder(location.search)
             .then(res => {
@@ -70,6 +72,7 @@ const UploadFile = () => {
                 } else if (res.status === 200) {
                     setFolders(res.result[0].folder)
                     setFiles(res.result[0].file)
+                    setFolderName(res.result[0].name || "Folder/File")
                 }
 
             })
@@ -106,7 +109,7 @@ const UploadFile = () => {
                         payload: data
                     })
                 })
-            console.log({source, name, size, file});
+
         });
     };
 
@@ -198,12 +201,14 @@ const UploadFile = () => {
                 })
             })
     }
-    console.log(shareFileData)
+
     return (
         <>
             <section className="upload-section">
                 <div>
+
                     <div className="upload-div">
+
                         <label className="dropdown">
                             <div className="dd-button">
                                 <i className="fas fa-plus"></i> New
@@ -221,6 +226,7 @@ const UploadFile = () => {
                             </ul>
                         </label>
 
+
                         <div>
                             <Button variant="secondary" onClick={() => {
                                 authDispatch({
@@ -232,7 +238,14 @@ const UploadFile = () => {
                     </div>
 
                     <div className="upload-folder">
-                        <h5>Folders</h5>
+
+                        { location.search && <div style={{display: "flex", alignItem: "center", paddingLeft: "1rem"}}>
+                            <i style={{paddingTop: ".8rem"}} className="fas fa-arrow-circle-left"></i>
+                            <h6 style={{marginLeft: ".5rem", cursor: "pointer", marginTop:".7rem"}}
+                                onClick={() => history(-1)}>Back</h6>
+                        </div>}
+
+                        <h4 style={{margin: "10px 20px"}}>{folderName}</h4>
                         <div className="upload-folder-btn">
                             {folders.map(folder =>
                                 <ContextMenuTrigger id="contextmenu" collect={() => {
@@ -250,7 +263,7 @@ const UploadFile = () => {
                     </div>
 
                     <div className="upload-folder">
-                        <h5>Files</h5>
+                        <h5 className="upload-text">Files</h5>
 
                         <div className="upload-folder-btn">
                             {files.map(file =>
@@ -280,7 +293,7 @@ const UploadFile = () => {
                     </div>
 
                     {shared.length ? <div className="upload-folder">
-                        <h5>Shared with me</h5>
+                        <h5 className="upload-text">Shared with me</h5>
 
                         <div className="upload-folder-btn">
                             {shared.map(file =>
