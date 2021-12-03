@@ -273,18 +273,17 @@ const UploadFile = () => {
                                     setDeleteData({id: file.id, fType: "file"})
                                 }}>
 
-                                    <Link to={`/show/${file.id}`} target={"_blank"}  rel="noreferrer noopener">
+                                    <a href={`/show/${file.id}`} target="_blank" rel="noopener noreferrer">
                                         <button>
                                         <i className="fas fa-file-alt"></i>{" "}
 
-                                        <div className="content-name" onClick={() => history(`/show/${file.id}`)
-                                        }>
+                                        <div className="content-name" >
                                             {/*<img src={file.content} alt="preview"/>*/}
                                             {/*<span> {file.path.split('/').at(-1)} </span>*/}
                                             <span className="content-name"> {file.name} </span>
                                             {/*<span> {file.size} </span>*/}
                                         </div></button>
-                                    </Link>
+                                    </a>
 
                                 </ContextMenuTrigger>)}
 
