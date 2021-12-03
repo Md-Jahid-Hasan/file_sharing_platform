@@ -30,6 +30,13 @@ function ShowFile() {
 
     return (
         <div style={{textAlign: "center", height: '100%'}}>
+            <iframe
+                src="http://127.0.0.1:8000/media/Presentation_Autonomous_Home_Assistant_Using_Camputer_Vision.pptx"
+                width="100%"
+                height="600px"
+                frameBorder="0"
+                title="slides"
+            />
             {file &&
             <FileViewer fileType={fileType}
                         filePath={file.content}
