@@ -74,7 +74,7 @@
 }
 
 .table thead th:nth-last-child(2) {
-    width: 20rem;
+    width: 10rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

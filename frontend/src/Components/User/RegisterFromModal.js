@@ -180,7 +180,7 @@ const RegisterFromModal = ({ reHandleClose, clickPassword, valueShow, user, user
             </div>
           </div>
           <button type="submit" className="btn-login">
-            Register Now
+              {user.email ? "Update User" : "Register Now"}
           </button>
         </form>
       </div>}
