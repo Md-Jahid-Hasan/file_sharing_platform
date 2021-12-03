@@ -3,7 +3,7 @@ import "./Dashboard.css";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import RegisterFromModal from "../User/RegisterFromModal";
-import {getUser} from "../../context/action/auth";
+import {getUser, deleteUser} from "../../context/action/auth";
 import {GlobalContext} from "../../context/Provider";
 import {useNavigate} from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -37,6 +37,25 @@ const Dashboard = () => {
             let new_user = users.map(u => u.pk === user.pk ? user : u)
             setUsers(new_user)
         }
+    }
+
+    const userDelete = (id) => {
+        deleteUser(id)
+            .then(res => {
+                if (res.status === 200) {
+                    let test = users.filter(user => user.pk !== id)
+                    setUsers(test)
+                    notificationDispatch({
+                        type: "ADD_ALERT",
+                        payload: res.message
+                    })
+                } else if (res.status === 400) {
+                    notificationDispatch({
+                        type: "ADD_ALERT",
+                        payload: res.message
+                    })
+                }
+            })
     }
 
     const reHandleClose = () => setReShow(false);
@@ -80,6 +99,7 @@ const Dashboard = () => {
                         <th>Type</th>
                         <th>Email</th>
                         <th>User Details</th>
+                        <th>Delete</th>
                         </thead>
                         <tbody>
                         {users && users.map((user, key) =>
@@ -92,6 +112,11 @@ const Dashboard = () => {
                                 <td data-label="User">
                                     <button className="btn-login" onClick={() => reHandleShow(user)}>
                                         Details
+                                    </button>
+                                </td>
+                                <td data-label="Delete">
+                                    <button className="btn-login" onClick={() => userDelete(user.pk)}>
+                                        Delete
                                     </button>
                                 </td>
                             </tr>

@@ -81,3 +81,17 @@ export const createUser = (data) => {
         })
 }
 
+export const deleteUser = (id) => {
+    return axios
+        .delete(`api/user/${id}/`, getHeader())
+        .then(res => {
+            console.log(res.data)
+            let data = {message: {message: "Successfully Deleted User", code: "success"}, status: 200}
+            return data
+        })
+        .catch(error => {
+            let data = {message: {message: error.response.data.detail, code: "danger"}, status: 400}
+            return data
+        })
+}
+

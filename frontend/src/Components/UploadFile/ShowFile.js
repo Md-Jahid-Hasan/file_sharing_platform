@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 import {getHeader} from "../../context/action/auth";
 
+
 const onError = e => {
     console.log(e, "error in file-viewer");
 };
@@ -25,14 +26,16 @@ function ShowFile() {
             })
             .catch(error => console.log(error.response))
     }, [])
-    console.log(file, fileType)
+
+
     return (
-        <div>
+        <div style={{textAlign: "center", height: '100%'}}>
             {file &&
-                <FileViewer fileType={fileType}
-                             style={{width:"80%"}}
-                            filePath={file.content}
-                            onError={onError}/>
+            <FileViewer fileType={fileType}
+                        filePath={file.content}
+                        onError={onError}
+
+            />
             }
         </div>
     );
